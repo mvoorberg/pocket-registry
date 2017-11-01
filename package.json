@@ -1,0 +1,28 @@
+{
+  "name": "pocket-registry",
+  "version": "1.0.0",
+  "description": "A simple JavaScript registry",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc ./node_modules/.bin/mocha tests --recursive -R spec --ui bdd --timeout 5000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/4umfreak/pocket-registry.git"
+  },
+  "keywords": [
+    "registry",
+    "simple"
+  ],
+  "author": "Mark Voorberg",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/4umfreak/pocket-registry/issues"
+  },
+  "homepage": "https://github.com/4umfreak/pocket-registry#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "nyc": "^11.2.1"
+  }
+}
