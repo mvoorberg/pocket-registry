@@ -17,7 +17,7 @@ exec('npm version ' + versionIncrement);
 exec('npm test');
 exec('git push');
 exec('git push --tags');
-exec('npm publish');
+exec('npm publish --tag beta');
 
 function exec(cmd) {
     var ret = shell.exec(cmd, {
