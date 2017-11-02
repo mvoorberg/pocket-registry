@@ -155,6 +155,10 @@ describe('PocketRegistry', function () {
         // Get nested with a default value
         expect(dogRegistry.get('Snoopy.color', 'unknown')).to.equal('unknown');
 
+        // Remove a non-existant property, shouldn't create the missing child.
+        dogRegistry.remove('Snoopy.who.cares');
+        expect(dogRegistry.has('Snoopy.who')).to.be.false;
+        
         // Setting a nested property, clearing it first.
         dogRegistry.remove('Snoopy.breed');
         expect(dogRegistry.has('Snoopy.breed')).to.be.false;

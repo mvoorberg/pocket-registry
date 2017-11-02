@@ -22,6 +22,11 @@ console.log(reg.get("foo")); // prints: bar
 console.log(reg.keys); // prints: ["foo"]
 reg.remove("foo");
 
+reg.set("foo", { bar: { baz: 123 }});
+console.log(reg.has("foo.bar")); // prints: true
+console.log(reg.get("foo.bar.xyz", "donut")); // prints: donut
+reg.remove("foo.garbage.truck"); // doesn't do anything, because foo.garbage doesn't exist.
+
 ```
 ### Extra Info
 The registry requires calling 'new' to instantiate, allowing multiple registries to be created, each one having different objects registered.
