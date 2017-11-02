@@ -4,7 +4,7 @@ const shell = require('shelljs');
 const isClean = exec('git status --porcelain');
 if (isClean.stdout || isClean.stderr) {
     console.error('Git working directory is not clean.');
-    console.error(isClean.stdout || isClean.stderr);
+    console.error(isClean.stdout, isClean.stderr);
     process.exit(2);
 }
 
