@@ -51,7 +51,7 @@ describe('PocketRegistry', function () {
         expect(testRegistry.get('a-boolean-false')).to.be.false; // But the boolean value is false.
         // Boolean True
         expect(testRegistry.has('a-boolean-true')).to.be.true; // Boolean exists
-        expect(testRegistry.get('a-boolean-true')).to.be.true; // But the boolean value is false.
+        expect(testRegistry.get('a-boolean-true')).to.be.true; // And the boolean value is true.
 
 
     });
@@ -91,34 +91,46 @@ describe('PocketRegistry', function () {
         expect(testRegistry.keys.sort()).to.eql(testKeys);
     });
 
-	it('can have two registries, each with different stuff in it', function() {
-		const dogRegistry = new PocketRegistry();
-		dogRegistry.set('Lassie', {breed: 'collie'});
-		dogRegistry.set('Snoopy', {breed: 'beagle'});
-		dogRegistry.set('Rocky', {breed: 'bulldog'});
+    it('can have two registries, each with different stuff in it', function () {
+        const dogRegistry = new PocketRegistry();
+        dogRegistry.set('Lassie', {
+            breed: 'collie'
+        });
+        dogRegistry.set('Snoopy', {
+            breed: 'beagle'
+        });
+        dogRegistry.set('Rocky', {
+            breed: 'bulldog'
+        });
 
-		const catRegistry = new PocketRegistry();
-		catRegistry.set('Morris', {breed: 'tabby'});
-		catRegistry.set('Grumpy Cat', {breed: 'calico'});
-		catRegistry.set('Hobbes', {breed: 'tiger'});
+        const catRegistry = new PocketRegistry();
+        catRegistry.set('Morris', {
+            breed: 'tabby'
+        });
+        catRegistry.set('Grumpy Cat', {
+            breed: 'calico'
+        });
+        catRegistry.set('Hobbes', {
+            breed: 'tiger'
+        });
 
-		// ** Dog registry
-		expect(dogRegistry.has('Lassie')).to.be.true;
-		expect(dogRegistry.get('Snoopy').breed).to.equal('beagle');
-		expect(dogRegistry.has('Rocky')).to.be.true;
-		// dogRegistry has no cats
-		expect(dogRegistry.has('Morris')).to.be.false;
-		expect(dogRegistry.has('Grumpy Cat')).to.be.false;
-		expect(dogRegistry.has('Hobbes')).to.be.false;
+        // ** Dog registry
+        expect(dogRegistry.has('Lassie')).to.be.true;
+        expect(dogRegistry.get('Snoopy').breed).to.equal('beagle');
+        expect(dogRegistry.has('Rocky')).to.be.true;
+        // dogRegistry has no cats
+        expect(dogRegistry.has('Morris')).to.be.false;
+        expect(dogRegistry.has('Grumpy Cat')).to.be.false;
+        expect(dogRegistry.has('Hobbes')).to.be.false;
 
-		// ** Cat registry
-		expect(catRegistry.has('Morris')).to.be.true;
-		expect(catRegistry.get('Grumpy Cat').breed).to.equal('calico');
-		expect(catRegistry.has('Hobbes')).to.be.true;
-		// catRegistry has no dogs
-		expect(catRegistry.has('Lassie')).to.be.false;
-		expect(catRegistry.has('Snoopy')).to.be.false;
-		expect(catRegistry.has('Rocky')).to.be.false;
-	});
+        // ** Cat registry
+        expect(catRegistry.has('Morris')).to.be.true;
+        expect(catRegistry.get('Grumpy Cat').breed).to.equal('calico');
+        expect(catRegistry.has('Hobbes')).to.be.true;
+        // catRegistry has no dogs
+        expect(catRegistry.has('Lassie')).to.be.false;
+        expect(catRegistry.has('Snoopy')).to.be.false;
+        expect(catRegistry.has('Rocky')).to.be.false;
+    });
 
 });
