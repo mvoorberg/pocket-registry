@@ -1,5 +1,6 @@
 'use strict';
 const assert = require('assert');
+const _ = require('lodash');
 
 function PocketRegistry() {
 	this.register = {};
@@ -7,24 +8,27 @@ function PocketRegistry() {
 	this.set = function (key, value) {
 		assert(!this.has(key), `Registry already has a '${key}'.`);
 		assert(value !== undefined, `'${key}' cannot be set to undefined.`);
-		this.register[key] = value;
+		return _.set(this.register, key, value);
 	};
 
-	this.get = function (key) {
-		assert(this.has(key), `Registry key '${key}' not found!`);
-		return this.register[key];
+	this.get = function (key, defaultValue) {
+		if (defaultValue === undefined) {
+			assert(this.has(key), `Registry key '${key}' not found, default not provided!`);
+		}
+		return _.get(this.register, key, defaultValue);
 	};
 
 	this.has = function (key) {
-		return this.register[key] !== undefined;
+		return _.has(this.register, key);
 	};
 
 	this.remove = function (key) {
-		delete this.register[key];
+		// delete this.register[key];
+		_.unset(this.register, key);
 	};
 };
 
-//Create a read-only 'keys' property
+// Create a read-only 'keys' property, using top-level objects only.
 Object.defineProperties(PocketRegistry.prototype, {
 	keys: {
 		get: function () {

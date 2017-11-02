@@ -34,6 +34,10 @@ describe('PocketRegistry', function () {
         expect(testRegistry.has('an-object')).to.be.true;
         expect(testRegistry.get('an-object')).to.equal(testObject);
 
+        // Getting something that isn't registered, but with a default this time
+        expect(testRegistry.get('not-exists', 'with a default')).to.equal('with a default');
+        expect(testRegistry.get('getting.a.nested.object', 'different default')).to.equal('different default');
+        
         // Function
         expect(testRegistry.has('a-function')).to.be.true;
         expect(testRegistry.get('a-function')).to.be.an.instanceof(Function);
@@ -131,6 +135,35 @@ describe('PocketRegistry', function () {
         expect(catRegistry.has('Lassie')).to.be.false;
         expect(catRegistry.has('Snoopy')).to.be.false;
         expect(catRegistry.has('Rocky')).to.be.false;
+    });
+
+    it('can use paths with nested objects', function () {
+        const dogRegistry = new PocketRegistry();
+        dogRegistry.set('Lassie', {
+            breed: 'collie'
+        });
+        dogRegistry.set('Snoopy', {
+            breed: 'beagle'
+        });
+        dogRegistry.set('Rocky', {
+            breed: 'bulldog'
+        });
+
+        // ** Dog registry
+        expect(dogRegistry.has('Lassie.breed')).to.be.true;
+        expect(dogRegistry.get('Snoopy.breed')).to.equal('beagle');
+        // Get nested with a default value
+        expect(dogRegistry.get('Snoopy.color', 'unknown')).to.equal('unknown');
+
+        // Setting a nested property, clearing it first.
+        dogRegistry.remove('Snoopy.breed');
+        expect(dogRegistry.has('Snoopy.breed')).to.be.false;
+        expect(dogRegistry.set('Snoopy.breed', 'dinosaur'));
+        expect(dogRegistry.get('Snoopy.breed')).to.equal('dinosaur');
+
+        // Setting a previously unset property
+        expect(dogRegistry.set('Snoopy.owner', 'Charlie Brown'));
+        expect(dogRegistry.get('Snoopy.owner')).to.equal('Charlie Brown');
     });
 
 });
