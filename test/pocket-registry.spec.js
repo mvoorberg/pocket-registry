@@ -168,6 +168,11 @@ describe('PocketRegistry', function () {
         // Setting a previously unset property
         expect(dogRegistry.set('Snoopy.owner', 'Charlie Brown'));
         expect(dogRegistry.get('Snoopy.owner')).to.equal('Charlie Brown');
+
+        // Setting a previously unset nested property
+        expect(dogRegistry.set('Fido.breed.species', 'mutt'));
+        expect(dogRegistry.get('Fido.breed.species')).to.equal('mutt');
+        
     });
 
 });
