@@ -1,5 +1,5 @@
 # pocket-registry
-Simple JavaScript registry for Node.js
+Simple JavaScript registry for Node.js. Supports nested paths 
 
 [![Coverage Status](https://coveralls.io/repos/github/4umfreak/pocket-registry/badge.svg?branch=master)](https://coveralls.io/github/4umfreak/pocket-registry?branch=master)
 [![Build Status](https://travis-ci.org/4umfreak/pocket-registry.svg?branch=v1.0.1)](https://travis-ci.org/4umfreak/pocket-registry)
@@ -24,6 +24,7 @@ reg.remove("foo");
 
 reg.set("foo", { bar: { baz: 123 }});
 console.log(reg.has("foo.bar")); // prints: true
+reg.get("foo.bar.xyz"); // throws an error
 console.log(reg.get("foo.bar.xyz", "donut")); // prints: donut
 reg.remove("foo.garbage.truck"); // doesn't do anything, because foo.garbage doesn't exist.
 
@@ -33,6 +34,6 @@ The registry requires calling 'new' to instantiate, allowing multiple registries
 
 Registry will throw an error if you try to set a key to undefined, or if you set the same key twice without removing it first.
 
-Calling get() on a non-existant key will also throw an error.
+Calling get() on a non-existent key will throw an error, unless a default value is provided.
 
 See the tests for more examples of usage.
