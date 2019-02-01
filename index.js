@@ -8,7 +8,8 @@ function PocketRegistry() {
 	this.set = function (key, value) {
 		assert(!this.has(key), `Registry already has a '${key}'.`);
 		assert(value !== undefined, `'${key}' cannot be set to undefined.`);
-		return _.set(this.register, key, value);
+		_.set(this.register, key, value);
+		return;
 	};
 
 	this.get = function (key, defaultValue) {
@@ -23,7 +24,6 @@ function PocketRegistry() {
 	};
 
 	this.remove = function (key) {
-		// delete this.register[key];
 		_.unset(this.register, key);
 	};
 };
