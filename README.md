@@ -24,6 +24,7 @@ reg.remove("foo");
 
 reg.set("foo", { bar: { baz: 123 }});
 console.log(reg.has("foo.bar")); // prints: true
+console.log(JSON.stringify(reg.get("foo.bar"))); // prints: {"baz": 123}
 reg.get("foo.bar.xyz"); // throws an error
 console.log(reg.get("foo.bar.xyz", "donut")); // prints: donut
 reg.remove("foo.garbage.truck"); // doesn't do anything, because foo.garbage doesn't exist.

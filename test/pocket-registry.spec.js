@@ -30,6 +30,9 @@ describe('PocketRegistry', function () {
         testRegistry.set('a-boolean-false', testBooleanFalse);
         testRegistry.set('a-boolean-true', testBooleanTrue);
 
+        // The register is private
+        expect(testRegistry.register).to.be.undefined;
+
         // Object
         expect(testRegistry.has('an-object')).to.be.true;
         expect(testRegistry.get('an-object')).to.equal(testObject);
