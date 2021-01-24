@@ -41,4 +41,4 @@ See the tests for more examples of usage.
 
 
 ## Need Support?
-Pocket-Registry is a [software development project](https://binaryops.ca) by BinaryOps Software Inc.
+Pocket-Registry is a [software development project](https://binaryops.ca) by BinaryOps Software Inc. 
