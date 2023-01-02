@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/4umfreak/pocket-registry#readme",
   "engines": {
-    "node": ">= 6"
+    "node": ">= 12"
   },
   "devDependencies": {
     "chai": "^4.3.7",
