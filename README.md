@@ -38,3 +38,7 @@ Registry will throw an error if you try to set a key to undefined, or if you set
 Calling get() on a non-existent key will throw an error, unless a default value is provided.
 
 See the tests for more examples of usage.
+
+
+## Need Support?
+Pocket-Registry is a [software development project](https://binaryops.ca) by BinaryOps Software Inc. 
