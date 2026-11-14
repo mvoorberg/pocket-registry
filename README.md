@@ -1,8 +1,7 @@
 # pocket-registry
 Simple JavaScript registry for Node.js. Supports nested paths 
 
-[![Coverage Status](https://coveralls.io/repos/github/4umfreak/pocket-registry/badge.svg?branch=master)](https://coveralls.io/github/4umfreak/pocket-registry?branch=master)
-[![Build Status](https://travis-ci.org/4umfreak/pocket-registry.svg?branch=v1.0.1)](https://travis-ci.org/4umfreak/pocket-registry)
+[![CI](https://github.com/mvoorberg/pocket-registry/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/mvoorberg/pocket-registry/actions/workflows/ci.yml)
 
 
 ## Installation

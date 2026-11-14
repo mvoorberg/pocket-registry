@@ -1,6 +1,8 @@
 # Changelog
 
 ## Unreleased
+- **Requires Node.js 22 or newer** (`engines.node` is `>=22`). The compiled code targets ES2023,
+  and CI runs on Node 22 and 24.
 
 - Rewritten in TypeScript. Compiled output and type definitions ship in `dist/`.
   Runtime behaviour is unchanged.
