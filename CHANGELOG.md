@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 2.0.0
 - **Requires Node.js 22 or newer** (`engines.node` is `>=22`). The compiled code targets ES2023,
   and CI runs on Node 22 and 24.
 
