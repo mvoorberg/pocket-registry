@@ -12,6 +12,12 @@ const PATHS = [
   "transom-config.definition.uri.prefix", "transom-config.transom.cors",
   "with space.key", "a.b-c", "a\.b", "a[\"esc\\\"aped\"]",
   ["a", "b"], ["a.b"], ["list", 0, "name"], [],
+  // Missing parents: an index segment creates an array, anything else an object.
+  "fresh[0].name", "fresh.0.name", "fresh.list[2]", 'a[""]', "a['']",
+  // Too large to be a safe array index, so the parent is an object.
+  "big[9007199254740993].x", "big.9007199254740991.x",
+  // Array paths with numbers, including -0, which lodash keeps as the key "-0".
+  ["arr", -0], ["arr", 0, "x"], ["arr", 1.5], ["-0"],
 ];
 const VALUES = [1, "str", null, false, 0, { nested: true }, [1, 2]];
 

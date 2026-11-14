@@ -34,8 +34,9 @@ function stringToPath(value: string): string[] {
   if (value.charCodeAt(0) === 46 /* . */) {
     result.push("");
   }
-  value.replace(rePropName, (match: string, number?: string, quote?: string, subString?: string): string => {
-    result.push(quote ? (subString ?? "").replace(reEscapeChar, "$1") : number || match);
+  // When `quote` is set, the regex has also captured `subString` (possibly empty).
+  value.replace(rePropName, (match: string, number: string | undefined, quote: string | undefined, subString: string): string => {
+    result.push(quote ? subString.replace(reEscapeChar, "$1") : number || match);
     return match;
   });
   return result;
@@ -49,16 +50,25 @@ function toKey(segment: PathSegment): string {
   return String(segment);
 }
 
-function castPath(path: Path, object: unknown): string[] {
+/** The path's segments as given; numbers in an array path stay numbers. */
+function castRawPath(path: Path, object: unknown): PathSegment[] {
   if (Array.isArray(path)) {
-    return path.map(toKey);
+    return [...path];
   }
   const text = String(path);
   return isKey(text, object) ? [text] : stringToPath(text);
 }
 
-function isIndex(segment: string): boolean {
-  return reIsUint.test(segment) && Number(segment) < Number.MAX_SAFE_INTEGER;
+/** The path's segments as property keys. */
+function castPath(path: Path, object: unknown): string[] {
+  return castRawPath(path, object).map(toKey);
+}
+
+/** Whether a segment names an array index (lodash's isIndex): checked before toKey, so -0 counts. */
+function isIndex(segment: PathSegment | undefined): boolean {
+  const isCandidate = typeof segment === "number" || (typeof segment === "string" && reIsUint.test(segment));
+  const value = Number(segment);
+  return isCandidate && value > -1 && value % 1 === 0 && value < Number.MAX_SAFE_INTEGER;
 }
 
 /** The value at `path`, or `defaultValue` when it resolves to undefined. Reads inherited properties too. */
@@ -101,7 +111,8 @@ export function has(object: unknown, path: Path): boolean {
  * or prototype are ignored.
  */
 export function set(object: Container, path: Path, value: unknown): void {
-  const segments = castPath(path, object);
+  const rawSegments = castRawPath(path, object);
+  const segments = rawSegments.map(toKey);
   let nested: Container = object;
   for (let index = 0; index < segments.length; index++) {
     const key = segments[index] as string;
@@ -113,7 +124,7 @@ export function set(object: Container, path: Path, value: unknown): void {
       return;
     }
     const existing = nested[key];
-    const next = segments[index + 1] as string;
+    const next = rawSegments[index + 1];
     // Boundary: an array is used as a keyed container here, like any object.
     const child: Container = isObjectLike(existing) ? existing : isIndex(next) ? ([] as unknown as Container) : {};
     nested[key] = child;
