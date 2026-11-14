@@ -10,4 +10,7 @@
   so known keys are typed; other keys are `unknown`. Code that relied on the old `any`
   return of `get()` needs a type argument or a cast.
 - Methods are bound to the instance, so they also work when detached (`const { get } = registry`).
-- `typescript` and `@types/lodash` moved from `dependencies` to `devDependencies`.
+- No runtime dependencies. lodash is replaced by a small built-in path module that follows
+  lodash's rules for keys like `a.b`, `a[0]` and `a["x.y"]`, including refusing paths through
+  `__proto__`, `constructor` and `prototype`. A test compares it against lodash.
+- `typescript` is no longer a runtime dependency.

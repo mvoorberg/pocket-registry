@@ -1,5 +1,5 @@
 import assert from "assert";
-import _ from "lodash";
+import * as _ from "./path";
 
 type RegistryValueOf<M extends object, K extends string> = K extends keyof M ? M[K] : unknown;
 
